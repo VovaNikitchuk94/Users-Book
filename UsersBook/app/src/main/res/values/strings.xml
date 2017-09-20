@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">UsersBook</string>
+    <string name="text_add_user">Add User</string>
+</resources>
