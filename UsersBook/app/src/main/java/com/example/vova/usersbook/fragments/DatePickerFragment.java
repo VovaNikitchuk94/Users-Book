@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -64,7 +63,6 @@ public class DatePickerFragment extends DialogFragment {
                         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new GregorianCalendar(year, month, day).getTime();
                         String strDate = dateFormatter.format(date);
-                        Log.d("vDev", "onCreateDialog strDate -> " + strDate);
                         sendResult(Activity.RESULT_OK, strDate);
                     }
                 })
@@ -72,8 +70,6 @@ public class DatePickerFragment extends DialogFragment {
     }
 
     private void sendResult(int result, String date) {
-        Log.d("vDev", "sendResult result -> " + result);
-        Log.d("vDev", "sendResult date -> " + date);
         if (getTargetFragment() == null) {
             return;
         }

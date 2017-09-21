@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vova.usersbook.R;
-import com.example.vova.usersbook.activities.UserCreateActivity;
 import com.example.vova.usersbook.activities.UserPagerActivity;
 import com.example.vova.usersbook.adapters.UserInfoAdapter;
 import com.example.vova.usersbook.models.UserInfo;
@@ -68,10 +66,13 @@ UserInfoAdapter.OnLongUserClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_user:
-                Intent intent = new Intent(getContext(), UserCreateActivity.class);
+                Intent intent = new Intent(getContext(), UserPagerActivity.class);
                 UserInfo userInfo = new UserInfo();
                 UserInfoEngine engine = new UserInfoEngine(getContext());
-                intent.putExtra(UserCreateActivity.INTENT_USER_ID, engine.addUser(userInfo));
+                long id = engine.addUser(userInfo);
+
+                intent.putExtra(UserPagerActivity.INTENT_USER_ID, id);
+                intent.putExtra(UserPagerActivity.KEY_IS_CREATE, true);
                 startActivity(intent);
                 return true;
             default:
@@ -95,7 +96,6 @@ UserInfoAdapter.OnLongUserClickListener{
 
     @Override
     public void onUserClickItem(UserInfo userInfo) {
-        Log.d("vDev", "user id -> " + userInfo.getId() );
         Intent intent = new Intent(getActivity(), UserPagerActivity.class);
         intent.putExtra(UserPagerActivity.KEY_USER_INTENT, userInfo);
         startActivity(intent);
