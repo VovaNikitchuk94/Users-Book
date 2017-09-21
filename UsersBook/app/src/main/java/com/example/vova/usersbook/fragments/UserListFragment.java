@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +26,11 @@ import com.example.vova.usersbook.models.engines.UserInfoEngine;
 import java.util.ArrayList;
 
 public class UserListFragment extends Fragment implements UserInfoAdapter.OnUserClickListener,
-UserInfoAdapter.OnLongUserClickListener{
+        UserInfoAdapter.OnLongUserClickListener {
 
     private ArrayList<UserInfo> mUserInfos = new ArrayList<>();
-    private UserInfoAdapter mAdapter;
     private RecyclerView mRecyclerView;
+    private UserInfoAdapter mAdapter = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,11 +87,15 @@ UserInfoAdapter.OnLongUserClickListener{
         if (!userInfoEngine.getAllUsers().isEmpty()) {
             mUserInfos.clear();
             mUserInfos.addAll(userInfoEngine.getAllUsers());
-            mAdapter = new UserInfoAdapter(mUserInfos);
-            mAdapter.setOnUserClickListener(UserListFragment.this);
-            mAdapter.setOnLongUserClickListener(UserListFragment.this);
-            mAdapter.notifyDataSetChanged();
-            mRecyclerView.setAdapter(mAdapter);
+            if (mAdapter == null) {
+                mAdapter = new UserInfoAdapter(mUserInfos);
+                mAdapter.setOnUserClickListener(UserListFragment.this);
+                mAdapter.setOnLongUserClickListener(UserListFragment.this);
+                mAdapter.notifyDataSetChanged();
+                mRecyclerView.setAdapter(mAdapter);
+            } else {
+                mAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -125,11 +130,19 @@ UserInfoAdapter.OnLongUserClickListener{
     }
 
     private void updateUI() {
-        UserInfoEngine engine = new UserInfoEngine(getContext());
         mUserInfos.clear();
+        UserInfoEngine engine = new UserInfoEngine(getContext());
         mUserInfos.addAll(engine.getAllUsers());
-        if (mAdapter != null) {
-            mAdapter.notifyDataSetChanged();
+        if (!mUserInfos.isEmpty()) {
+            if (mAdapter != null) {
+                mAdapter.notifyDataSetChanged();
+            } else {
+                mAdapter = new UserInfoAdapter(mUserInfos);
+                mAdapter.setOnUserClickListener(UserListFragment.this);
+                mAdapter.setOnLongUserClickListener(UserListFragment.this);
+                mAdapter.notifyDataSetChanged();
+                mRecyclerView.setAdapter(mAdapter);
+            }
         }
     }
 

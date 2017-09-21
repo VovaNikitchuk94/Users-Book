@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="8dp"
+    android:paddingEnd="16sp"
     android:paddingStart="16dp"
     android:paddingTop="8dp">
 
@@ -15,14 +16,14 @@
 
         <TextView
             android:id="@+id/textViewUserNameFragmentUserInfo"
-            android:layout_width="80dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/textNameUser"
             android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/editTextUserNameFragmentUserInfo"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/textHintUserName"/>
 
@@ -35,14 +36,14 @@
 
         <TextView
             android:id="@+id/textViewUserSurnameFragmentUserInfo"
-            android:layout_width="80dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/textSurname"
             android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/editTextUserSurnameFragmentUserInfo"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/textHintSurname"/>
 
@@ -56,14 +57,14 @@
 
         <TextView
             android:id="@+id/textViewUserBDayFragmentUserInfo"
-            android:layout_width="80dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/textBirthday"
             android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/textViewSetUserBDayFragmentUserInfo"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/textInputDate"
             android:textSize="18sp"/>
