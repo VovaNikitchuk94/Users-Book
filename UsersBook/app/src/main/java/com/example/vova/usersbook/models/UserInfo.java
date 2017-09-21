@@ -2,16 +2,21 @@ package com.example.vova.usersbook.models;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.vova.usersbook.constants.DBConstans.UsersTable;
 
-public class UserInfo extends BaseEntity {
+public class UserInfo extends BaseEntity implements Parcelable {
 
     private String mUserName;
     private String mUserSurname;
-    private long mUserBDay;
+    private String mUserBDay;
 
-    public UserInfo(String userName, String userSurname, long userBDay) {
+    public UserInfo() {
+    }
+
+    public UserInfo(String userName, String userSurname, String userBDay) {
         mUserName = userName;
         mUserSurname = userSurname;
         mUserBDay = userBDay;
@@ -21,7 +26,7 @@ public class UserInfo extends BaseEntity {
         setId(cursor.getLong(cursor.getColumnIndex(UsersTable.Cols.USER_ID)));
         mUserName = cursor.getString(cursor.getColumnIndex(UsersTable.Cols.USER_NAME));
         mUserSurname = cursor.getString(cursor.getColumnIndex(UsersTable.Cols.USER_SURNAME));
-        mUserBDay = cursor.getLong(cursor.getColumnIndex(UsersTable.Cols.USER_BDAY));
+        mUserBDay = cursor.getString(cursor.getColumnIndex(UsersTable.Cols.USER_BDAY));
     }
 
     public String getUserName() {
@@ -40,11 +45,11 @@ public class UserInfo extends BaseEntity {
         mUserSurname = userSurname;
     }
 
-    public long getUserBDay() {
+    public String getUserBDay() {
         return mUserBDay;
     }
 
-    public void setUserBDay(long userBDay) {
+    public void setUserBDay(String userBDay) {
         mUserBDay = userBDay;
     }
 
@@ -56,4 +61,37 @@ public class UserInfo extends BaseEntity {
         values.put(UsersTable.Cols.USER_BDAY, getUserBDay());
         return values;
     }
+
+    protected UserInfo(Parcel in) {
+        setId(in.readLong());
+        mUserName = in.readString();
+        mUserSurname = in.readString();
+        mUserBDay = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(getId());
+        dest.writeString(mUserName);
+        dest.writeString(mUserSurname);
+        dest.writeString(mUserBDay);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<UserInfo> CREATOR = new Parcelable.Creator<UserInfo>() {
+        @Override
+        public UserInfo createFromParcel(Parcel in) {
+            return new UserInfo(in);
+        }
+
+        @Override
+        public UserInfo[] newArray(int size) {
+            return new UserInfo[size];
+        }
+    };
 }

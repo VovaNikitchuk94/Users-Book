@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">UsersBook</string>
     <string name="text_add_user">Add User</string>
+    <string name="textNameUser">Name:</string>
+    <string name="textHintUserName">User name</string>
+    <string name="textBirthday">Birthday</string>
+    <string name="textHintBirthday">Birthday</string>
+    <string name="textSurname">Surname</string>
+    <string name="textHintSurname">Surname</string>
+    <string name="textDeleteUser">Delete user</string>
+    <string name="textDelete">Delete</string>
+    <string name="textMessageDeleteUser">Do you want to delete user?</string>
+    <string name="textDone">Done</string>
+    <string name="textNewUser">New User</string>
+    <string name="textNameCannotBeEmpty">Name cannot de empty</string>
+    <string name="textUserBDay">User\'s birth of day</string>
+    <string name="textInputDate">dd/mm/yyyy</string>
 </resources>

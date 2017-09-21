@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activities.UserPagerActivity"
+            android:parentActivityName=".activities.UserListActivity">
+        </activity>
+        <activity android:name=".activities.UserCreateActivity"
+                  android:label="@string/textNewUser"
+                  android:parentActivityName=".activities.UserListActivity">
+        </activity>
     </application>
 
 </manifest>

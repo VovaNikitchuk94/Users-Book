@@ -36,6 +36,27 @@ public class UserInfoEngine extends BaseEngine {
         return userInfos;
     }
 
+    public UserInfo getUserByID(long id) {
+        UserInfo userInfo = null;
+        SQLiteDatabase database = getReadable();
+        String request = UsersTable.Cols.USER_ID + "=?";
+        String arrArgs[] = new String[] {Long.toString(id)};
+        Cursor cursor = database.query(getStrTableName(), null, request, arrArgs, null, null, null);
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    userInfo = new UserInfo(cursor);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.close();
+        }
+        return userInfo;
+    }
+
     public void removeUserById(long id) {
         SQLiteDatabase database = getWritable();
         String request = UsersTable.Cols.USER_ID + "=?";

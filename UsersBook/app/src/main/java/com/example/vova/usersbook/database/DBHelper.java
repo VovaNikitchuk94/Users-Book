@@ -18,9 +18,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + UsersTable.TABLE_NAME
                 + " (" + UsersTable.Cols.USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + UsersTable.Cols.USER_NAME + " TEXT NOT NULL, "
+                + UsersTable.Cols.USER_NAME + " TEXT, "
                 + UsersTable.Cols.USER_SURNAME + " TEXT, "
-                + UsersTable.Cols.USER_BDAY + " INTEGER); ");
+                + UsersTable.Cols.USER_BDAY + " TEXT); ");
     }
 
     @Override
